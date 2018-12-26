@@ -135,6 +135,7 @@ class Grid extends Component{
                     }
                 }
             }
+            return <br />
         })
     }
 
