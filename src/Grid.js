@@ -118,7 +118,31 @@ class Grid extends Component{
         })   
         if(this.state.grid[e] === 9){
             alert("Perdeu")
+            this.setState({
+                grid: values
+            })
+        }else{
+            if(this.state.grid[e] === 0){
+                this.checkEmpty(e);
+            }
         }
+    }
+
+    checkEmpty = (e) => {
+        let grid = [...this.state.grid]
+        let values = [...this.state.values]
+        grid[e] = values[e]
+        grid[e-1] = values[e-1]
+        grid[e+1] = values[e+1]
+        grid[e-9] = values[e-9]
+        grid[e+9] = values[e+9]
+        grid[e-10] = values[e-10]
+        grid[e+10] = values[e+10]
+        grid[e-11] = values[e-11]
+        grid[e+11] = values[e+11]
+        this.setState({
+            grid: grid
+        })
     }
 
     renderGrid(){
@@ -126,12 +150,12 @@ class Grid extends Component{
             let valor = typeof value === 'number' ? '*' : value;
             if(index < 100){
                 if(index === 0){
-                    return <div className="grid" key={index} onClick={() => this.onClickHandler(index)}>{valor}</div>
+                    return <div className={typeof value === 'number' ? 'grid' : 'hide'} key={index} onClick={() => this.onClickHandler(index)}>{valor}</div>
                 }else{
                     if(index % 10 !== 9){
-                        return <div className="grid" key={index} onClick={() => this.onClickHandler(index)}>{valor}</div>
+                        return <div className={typeof value === 'number' ? 'grid' : 'hide'} key={index} onClick={() => this.onClickHandler(index)}>{valor}</div>
                     }else{
-                        return <span><div className="grid" key={index} onClick={() => this.onClickHandler(index)}>{valor}</div><br /></span>
+                        return <span><div className={typeof value === 'number' ? 'grid' : 'hide'} key={index} onClick={() => this.onClickHandler(index)}>{valor}</div><br /></span>
                     }
                 }
             }

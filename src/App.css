@@ -41,3 +41,14 @@
   line-height: 25px;
   color: white;
 }
+
+.hide {
+  border: 1px solid black;
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  font-size: 25px;
+  line-height: 25px;
+  color: #AAA;
+  background-color: #AAA;
+}
