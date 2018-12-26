@@ -5,12 +5,15 @@ class Grid extends Component{
     constructor(props){
         super(props);
         this.state = {
-            grid: []
+            grid: [],
+            values: []
         }
+        this.onClickHandler = this.onClickHandler.bind(this);
     }
 
     componentDidMount(){
         let grid = []
+        let values = []
         let random = []
         for(var i = 0; i < 10; i++){
             random = random.concat(Math.floor(Math.random() * 100))
@@ -65,22 +68,67 @@ class Grid extends Component{
                     }
                 }
             }
-            
         })
+        for(i = 0; i < 100; i++){
+            switch(grid[i]){
+                case 1:
+                    values[i] = '1⃣'
+                    break;
+                case 2:
+                    values[i] = '2️⃣'
+                    break;
+                case 3:
+                    values[i] = '3️⃣'
+                    break;
+                case 4:
+                    values[i] = '4⃣'
+                    break;
+                case 5:
+                    values[i] = '5⃣'
+                    break;
+                case 6:
+                    values[i] = '6⃣'
+                    break;
+                case 7:
+                    values[i] = '7⃣'
+                    break;
+                case 8:
+                    values[i] = '8⃣'
+                    break;
+                case 9:
+                    values[i] = '💣'
+                    break;
+                default:
+                    values[i] = '_'
+                    break;
+            }
+        }
+        this.setState({
+            grid: grid,
+            values: values
+        })
+    }
+
+    onClickHandler(e){
+        let grid = [...this.state.grid]
+        let values = [...this.state.values]
+        grid[e] = values[e]
         this.setState({
             grid: grid
-        })
+        })   
+        if(this.state.grid[e] === 9){
+        }
     }
 
     renderGrid(){
         return this.state.grid.map((value, index) => {
             if(index === 0){
-                return <div className="grid" style={{backgroundColor: value === 9 ? 'red' : 'white'}}>{value}</div>
+                return <div className="grid" onClick={() => this.onClickHandler(index)}>{value}</div>
             }else{
                 if(index % 10 !== 9){
-                    return <div className="grid" style={{backgroundColor: value === 9 ? 'red' : 'white'}}>{value}</div>
+                    return <div className="grid" onClick={() => this.onClickHandler(index)}>{value}</div>
                 }else{
-                    return <span><div className="grid" style={{backgroundColor: value === 9 ? 'red' : 'white'}} >{value}</div><br /></span>
+                    return <span><div className="grid" onClick={() => this.onClickHandler(index)}>{value}</div><br /></span>
                 }
             }
         })
