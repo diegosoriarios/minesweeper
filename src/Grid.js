@@ -117,18 +117,22 @@ class Grid extends Component{
             grid: grid
         })   
         if(this.state.grid[e] === 9){
+            alert("Perdeu")
         }
     }
 
     renderGrid(){
         return this.state.grid.map((value, index) => {
-            if(index === 0){
-                return <div className="grid" onClick={() => this.onClickHandler(index)}>{value}</div>
-            }else{
-                if(index % 10 !== 9){
-                    return <div className="grid" onClick={() => this.onClickHandler(index)}>{value}</div>
+            let valor = typeof value === 'number' ? '*' : value;
+            if(index < 100){
+                if(index === 0){
+                    return <div className="grid" key={index} onClick={() => this.onClickHandler(index)}>{valor}</div>
                 }else{
-                    return <span><div className="grid" onClick={() => this.onClickHandler(index)}>{value}</div><br /></span>
+                    if(index % 10 !== 9){
+                        return <div className="grid" key={index} onClick={() => this.onClickHandler(index)}>{valor}</div>
+                    }else{
+                        return <span><div className="grid" key={index} onClick={() => this.onClickHandler(index)}>{valor}</div><br /></span>
+                    }
                 }
             }
         })
