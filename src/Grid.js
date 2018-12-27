@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import './App.css'
 
+let random = []
+
 class Grid extends Component{
     constructor(props){
         super(props);
@@ -14,7 +16,6 @@ class Grid extends Component{
     componentDidMount(){
         let grid = []
         let values = []
-        let random = []
         for(var i = 0; i < 10; i++){
             random = random.concat(Math.floor(Math.random() * 100))
         }
@@ -123,26 +124,10 @@ class Grid extends Component{
             })
         }else{
             if(this.state.grid[e] === 0){
-                this.checkEmpty(e);
+                //this.checkEmpty(e);
+                console.log("Implementar mostrar todas as casas vazias proximas")
             }
         }
-    }
-
-    checkEmpty = (e) => {
-        let grid = [...this.state.grid]
-        let values = [...this.state.values]
-        grid[e] = values[e]
-        grid[e-1] = values[e-1]
-        grid[e+1] = values[e+1]
-        grid[e-9] = values[e-9]
-        grid[e+9] = values[e+9]
-        grid[e-10] = values[e-10]
-        grid[e+10] = values[e+10]
-        grid[e-11] = values[e-11]
-        grid[e+11] = values[e+11]
-        this.setState({
-            grid: grid
-        })
     }
 
     renderGrid(){
